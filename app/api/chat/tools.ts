@@ -10,7 +10,7 @@ export const weatherTool = tool({
   parameters: z.object({
     city: z.string().describe('The city to get weather for'),
   }),
-  func: async ({ city }: { city: string }) => {
+  execute: async ({ city }) => {
     // Replace with a real API call in production
     const mockWeather: Record<string, { temp: number; condition: string }> = {
       london: { temp: 12, condition: 'Cloudy' },
