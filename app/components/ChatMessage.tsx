@@ -1,5 +1,12 @@
 import type { UIMessage } from 'ai';
 import MarkdownPreview from '@uiw/react-markdown-preview'; 
+import JsonView from '@uiw/react-json-view';
+import JsonViewEditor from '@uiw/react-json-view/editor';
+import { lightTheme } from '@uiw/react-json-view/light';
+import { darkTheme } from '@uiw/react-json-view/dark';
+import { TriangleArrow } from '@uiw/react-json-view/triangle-arrow';
+import { TriangleSolidArrow } from '@uiw/react-json-view/triangle-solid-arrow';
+import JsonView from '@uiw/react-json-view';
 
 export default function ChatMessage({ message }: { message: UIMessage }) {
   const isUser = message.role === 'user';
@@ -17,6 +24,13 @@ export default function ChatMessage({ message }: { message: UIMessage }) {
             : 'dark:bg-zinc-800 rounded-bl-md'
         }`}
       >
+          <JsonView
+            theme={lightTheme}
+            darkTheme={darkTheme}
+            triangle={TriangleArrow}
+            triangleSolid={TriangleSolidArrow}
+            value={text}
+          />               
         <MarkdownPreview source={text} style={{ padding: 16 }} />
       </div>
       

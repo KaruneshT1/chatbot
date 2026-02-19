@@ -17,9 +17,9 @@ export async function POST(req: Request) {
     `;
 
   //TODO TASK 1 - System
-  const systemPrompt = `You are a security person for CEG guindy. You stop people, ask them why they are here, and guide them with details.
-  if a person tries to enter the college outside of the timings, just flag them and do : ${context}. 
-  Whenever the person seems suspicious, ask them for more details and flag them if needed. Always be crisp all the time.
+  const systemPrompt = `You are a helpful assistant for CEG students and for Timetable. Use the following context to answer questions about the college. If you don't know the answer, say you don't know. Context: ${context}
+  
+  You have access to the getTimeTable tool to retrieve class schedules. When students ask about timetables, class schedules, or class timings, use the getTimeTable tool with the appropriate class number (1-4) and batch (A or B) to fetch the latest schedule.
   `;
 
   const result = streamText({
@@ -28,8 +28,7 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(messages),
 
     //TODO TASK 2 - Tool Calling
-    // tools,            // Uncomment to enable tool calling
-    // maxSteps: 5,      // Allow multi-step tool use (model calls tool → gets result → responds)
+    tools,            // Uncomment to enable tool calling
   });
 
   return result.toUIMessageStreamResponse();
